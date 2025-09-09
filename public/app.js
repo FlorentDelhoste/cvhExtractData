@@ -655,12 +655,13 @@ function renderStatsTable(rows) {
   const sorted = rows.slice().sort((a, b) => a.percent - b.percent);
   const tr = sorted.map(r => {
     const pct = Math.max(0, Math.min(100, r.percent));
+    const hue = Math.round((pct / 100) * 120);
     return `
       <tr>
         <td class="mono label">${escapeHtml(r.eventName)}</td>
         <td style="width:60%">
           <div class="progress" aria-label="${escapeHtml(r.eventName)} complétude">
-            <div class="progress-bar" style="width:${pct.toFixed(1)}%"></div>
+            <div class="progress-bar" style="width:${pct.toFixed(1)}%; background:hsl(${hue}, 90%, 45%)"></div>
           </div>
         </td>
         <td class="mono" style="text-align:right; width:80px">${pct.toFixed(1)}%</td>
