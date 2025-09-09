@@ -1,0 +1,17 @@
+{
+  "name": "graylog-search-app",
+  "version": "0.1.0",
+  "description": "Local CSV/JSON comparator to extract and compare stayId values (dark UI)",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "dev:all": "node dev.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

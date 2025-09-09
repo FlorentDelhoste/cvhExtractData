@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comparaison stayId — Material</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">Comparaison stayId</div>
+      <div class="hint">Material Design • CSV/JSON local</div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Importer 2 fichiers (CSV/JSON)</h2>
+        <div class="grid">
+          <div class="col">
+            <div class="links">
+              <a class="ext-link" href="https://graylog.swmcloud.net/search?q=application%3Aform%5C-engine+AND+loggerName%3AaccessLog+AND+uri%3A%5C%2Fform%5C-engine%5C%2Fapi%5C%2Fv1%5C%2Fform%5C-instance%5C-definitions%5C%2Fundefined+AND+issuer%3APP&rangetype=relative&from=7776000" target="_blank" rel="noopener noreferrer">Requête Graylog 1</a>
+            </div>
+            <label class="md-field" data-variant="filled">
+              <input id="file1" type="file" accept=".csv,.json,text/csv,application/json" />
+              <span>Fichier 1</span>
+            </label>
+          </div>
+          <div class="col">
+            <div class="links">
+              <a class="ext-link" href="https://graylog.swmcloud.net/search?rangetype=relative&q=application%3Aform%5C-engine+AND+message%3A%22AccessLog++uri%3D%2Fform-engine%2Fapi%2Fform-instance%2Fcreate%22+AND+issuer%3APP&from=7776000" target="_blank" rel="noopener noreferrer">Requête Graylog 2</a>
+            </div>
+            <label class="md-field" data-variant="filled">
+              <input id="file2" type="file" accept=".csv,.json,text/csv,application/json" />
+              <span>Fichier 2</span>
+            </label>
+          </div>
+        </div>
+        <div class="filters-row">
+          <label class="md-field" style="min-width:260px" data-variant="filled">
+            <select id="filterInstitutionOid">
+              <option value="">Toutes les institutions</option>
+            </select>
+            <span>Filtrer par institutionOid</span>
+          </label>
+        </div>
+        <div id="loadError" class="error" hidden></div>
+      </section>
+
+      <section class="card" id="cardBoth" hidden>
+        <div class="results-header" id="headerBoth">
+          <h2>Fichiers 1 et 2 — stayId uniques</h2>
+          <div class="muted">Cliquer pour replier/déplier</div>
+        </div>
+        <div class="card-body" id="bodyBoth">
+          <div class="grid-2">
+            <section class="card" id="card1" hidden>
+              <div class="results-header" id="header1">
+                <h2>Fichier 1 — stayId uniques</h2>
+                <div id="summary1" class="muted"></div>
+              </div>
+              <div class="card-body" id="body1">
+                <div id="table1Uniq"></div>
+              </div>
+            </section>
+
+            <section class="card" id="card2" hidden>
+              <div class="results-header" id="header2">
+                <h2>Fichier 2 — stayId uniques</h2>
+                <div id="summary2" class="muted"></div>
+              </div>
+              <div class="card-body" id="body2">
+                <div id="table2Uniq"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="cardSynth" hidden>
+        <div class="results-header">
+          <h2>Synthèse — présents dans F1, absents de F2 (uniques)</h2>
+          <div class="header-actions">
+            <label class="md-field" style="min-width:240px" data-variant="filled">
+              <select id="filterEventName">
+                <option value="">Tous les eventName (communs)</option>
+              </select>
+              <span>Filtrer par eventName</span>
+            </label>
+            <div id="summarySynth" class="muted"></div>
+            <button id="exportSynth" class="btn btn-small" type="button" disabled>Exporter CSV</button>
+          </div>
+        </div>
+        <h3 class="section-sub">Taux de complétude des formulaires</h3>
+        <div class="chart-wrap">
+          <canvas id="donutSynth" width="160" height="160"></canvas>
+          <div class="donut-legend">
+            <div class="donut-percent" id="donutPercent">0%</div>
+            <div class="muted">Présents dans F1 et F2</div>
+          </div>
+        </div>
+        <h3 class="section-sub">Statistiques par eventName</h3>
+        <div id="tableStats"></div>
+        <div id="tableSynth"></div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Traitement local • Aucune donnée envoyée au serveur.</span>
+    </footer>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+  </html>
